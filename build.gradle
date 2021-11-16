@@ -16,6 +16,8 @@ dependencies {
     testImplementation 'com.google.testing.compile:compile-testing:0.19'
     // 以下を追加しないとjava.lang.NoClassDefFoundError: com/sun/source/util/TreeScannerがでてテストが落ちる
     testImplementation files("${System.properties['java.home']}/../lib/tools.jar")
+
+    testRuntimeOnly 'javax.ws.rs:javax.ws.rs-api:2.1.1'
 }
 
 test {
