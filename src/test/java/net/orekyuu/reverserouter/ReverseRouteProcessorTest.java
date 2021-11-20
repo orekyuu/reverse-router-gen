@@ -10,8 +10,6 @@ import java.util.Arrays;
 
 import static com.google.testing.compile.Compiler.javac;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class ReverseRouteProcessorTest {
 
   public Compilation buildCompilation(JavaFileObject... files) {
@@ -23,6 +21,8 @@ class ReverseRouteProcessorTest {
     JavaFileObject file = JavaFileObjects.forResource("JaxrsController.java");
     Compilation compilation = buildCompilation(file);
 
-    CompilationSubject.assertThat(compilation).succeeded();
+    CompilationSubject.assertThat(compilation)
+            .generatedSourceFile("ReverseRouter")
+            .hasSourceEquivalentTo(JavaFileObjects.forResource("expected/ReverseRouter.java"));
   }
 }
