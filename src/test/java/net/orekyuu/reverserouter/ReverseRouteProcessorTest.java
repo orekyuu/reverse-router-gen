@@ -49,4 +49,13 @@ class ReverseRouteProcessorTest {
             .generatedSourceFile("MyReverseRouter")
             .hasSourceEquivalentTo(JavaFileObjects.forSourceString("MyReverseRouter", "class MyReverseRouter {}"));
   }
+
+  @Test
+  void testManyControllers() {
+    Compilation compilation = buildCompilation(
+            JavaFileObjects.forResource("JaxrsController.java"),
+            JavaFileObjects.forResource("OtherJaxrsController.java"));
+    CompilationSubject.assertThat(compilation)
+            .generatedSourceFile("ReverseRouter");
+  }
 }
