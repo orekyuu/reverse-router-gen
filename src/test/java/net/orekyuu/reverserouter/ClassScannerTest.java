@@ -58,7 +58,7 @@ class ClassScannerTest {
         assertEquals(annotation.params().get(0), new AnalyzedAnnotationParameter("value()", "java.lang.String", "/users"));
 
         assertEquals(clazz.methods().size(), 2);
-        List<AnalyzedMethod> methodByAnnotation = clazz.findMethodByAnnotation(Path.class);
+        List<AnalyzedMethod> methodByAnnotation = clazz.findMethodByAnnotation(Path.class.getName());
         assertEquals(methodByAnnotation.size(), 1);
         assertEquals(methodByAnnotation.get(0).name(), "all");
     }

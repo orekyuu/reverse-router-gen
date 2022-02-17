@@ -37,7 +37,7 @@ class ReverseRouteProcessorTest {
 
     CompilationSubject.assertThat(compilation)
             .generatedSourceFile("ReverseRouter")
-            .hasSourceEquivalentTo(JavaFileObjects.forSourceString("ReverseRouter", "class ReverseRouter {}"));
+            .containsElementsIn(JavaFileObjects.forSourceString("ReverseRouter", "class ReverseRouter"));
   }
 
   @Test
@@ -47,7 +47,7 @@ class ReverseRouteProcessorTest {
 
     CompilationSubject.assertThat(compilation)
             .generatedSourceFile("MyReverseRouter")
-            .hasSourceEquivalentTo(JavaFileObjects.forSourceString("MyReverseRouter", "class MyReverseRouter {}"));
+            .containsElementsIn(JavaFileObjects.forSourceString("MyReverseRouter", "class MyReverseRouter"));
   }
 
   @Test
@@ -56,6 +56,7 @@ class ReverseRouteProcessorTest {
             JavaFileObjects.forResource("JaxrsController.java"),
             JavaFileObjects.forResource("OtherJaxrsController.java"));
     CompilationSubject.assertThat(compilation)
-            .generatedSourceFile("ReverseRouter");
+            .generatedSourceFile("ReverseRouter")
+            .hasSourceEquivalentTo(JavaFileObjects.forResource("expected/testManyControllers_ReverseRouter.java"));
   }
 }
