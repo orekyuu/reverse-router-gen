@@ -35,7 +35,9 @@ public class ReverseRouterProcessingContext {
         try {
             Filer filer = processEnv.getFiler();
             TypeSpec.Builder builder = TypeSpec.classBuilder(configuration.reverseRouterClassName());
-            generator.generate(classes, new ReverseRouteWriter(builder));
+            ReverseRouteWriter writer = new ReverseRouteWriter(builder);
+            generator.generate(classes, writer);
+            writer.writeInnerRouteBuilderClass();
             JavaFile reverseRouter = JavaFile.builder(configuration.rootPackageName(),
                     builder.build()).build();
             reverseRouter.writeTo(filer);
