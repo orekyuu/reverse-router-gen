@@ -9,6 +9,10 @@ allprojects {
     group 'net.orekyuu.rrg'
     version '1.0-SNAPSHOT'
 
+    repositories {
+        mavenCentral()
+    }
+
     dependencies {
         testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
         testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
@@ -18,13 +22,9 @@ allprojects {
         testImplementation files("${System.properties['java.home']}/../lib/tools.jar")
     }
 
-}
+    test {
+        useJUnitPlatform()
+        jvmArgs = ['--add-opens', 'jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED']
+    }
 
-repositories {
-    mavenCentral()
-}
-
-test {
-    useJUnitPlatform()
-    jvmArgs = ['--add-opens', 'jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED']
 }
