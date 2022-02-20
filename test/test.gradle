@@ -1,0 +1,9 @@
+dependencies {
+    implementation files("${System.properties['java.home']}/../lib/tools.jar")
+    implementation 'com.google.testing.compile:compile-testing:0.19'
+    implementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    runtimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+
+    implementation project(':reverse-router-gen-core')
+    implementation 'org.mockito:mockito-core:4.3.1'
+}

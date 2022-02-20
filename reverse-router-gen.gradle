@@ -1,0 +1,30 @@
+plugins {
+    id 'java-library'
+}
+
+description "reverse-router-gen"
+
+allprojects {
+    apply plugin: "java-library"
+    group 'net.orekyuu.rrg'
+    version '1.0-SNAPSHOT'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+        testImplementation 'com.google.testing.compile:compile-testing:0.19'
+        testImplementation("org.assertj:assertj-core:3.22.0")
+        // 以下を追加しないとjava.lang.NoClassDefFoundError: com/sun/source/util/TreeScannerがでてテストが落ちる
+        testImplementation files("${System.properties['java.home']}/../lib/tools.jar")
+    }
+
+    test {
+        useJUnitPlatform()
+        jvmArgs = ['--add-opens', 'jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED']
+    }
+
+}

@@ -1,2 +1,16 @@
-rootProject.name = 'reverse-router'
+rootProject.name = 'reverse-router-gen'
 
+include ':reverse-router-gen-api'
+include ':reverse-router-gen-core'
+include ':test'
+
+include ':extensions:jaxrs'
+
+def setBuildFile(project) {
+    project.buildFileName = "${project.name}.gradle"
+    project.children.each {
+        setBuildFile(it)
+    }
+}
+
+setBuildFile(rootProject)
