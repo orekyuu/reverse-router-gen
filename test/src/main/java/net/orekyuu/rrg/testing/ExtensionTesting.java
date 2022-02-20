@@ -2,7 +2,6 @@ package net.orekyuu.rrg.testing;
 
 import com.google.testing.compile.Compilation;
 import com.google.testing.compile.CompilationSubject;
-import com.google.testing.compile.JavaFileObjectSubject;
 import com.google.testing.compile.JavaFileObjects;
 import net.orekyuu.rrg.ReverseRouteProcessor;
 import org.junit.jupiter.api.Assertions;
@@ -34,12 +33,13 @@ public abstract class ExtensionTesting {
                     .withProcessors(new ReverseRouteProcessor())
                     .compile(files);
 
-            JavaFileObjectSubject subject = CompilationSubject.assertThat(compilation)
-                    .generatedSourceFile("ReverseRouter");
+            CompilationSubject subject = CompilationSubject.assertThat(compilation);
 
             List<JavaFileObject> actualFiles = files(actualDir);
             for (JavaFileObject actualFile : actualFiles) {
-                subject.hasSourceEquivalentTo(actualFile);
+                String file = Paths.get(actualFile.toUri()).getFileName().toString();
+                file = file.substring(0, file.length() - ".java".length());
+                subject.generatedSourceFile(file).hasSourceEquivalentTo(actualFile);
             }
         } catch (URISyntaxException | IOException e) {
             Assertions.fail(e);

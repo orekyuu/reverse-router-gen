@@ -1,5 +1,3 @@
-import java.lang.Object;
-
 public final class ReverseRouter {
     private ReverseRouter() {
     }
@@ -8,15 +6,15 @@ public final class ReverseRouter {
      * SimpleTestController#all()
      * GET /users/all
      */
-    public static Object SimpleTestControllerall() {
-        return null;
+    public static SimpleTestControllerAllBuilder simpleTestControllerAll() {
+        return new SimpleTestControllerAllBuilder();
     }
 
     /**
      * SimpleTestController#show()
      * GET /users/show/@{id}
      */
-    public static Object SimpleTestControllershow() {
-        return null;
+    public static SimpleTestControllerShowBuilder simpleTestControllerShow() {
+        return new SimpleTestControllerShowBuilder();
     }
 }

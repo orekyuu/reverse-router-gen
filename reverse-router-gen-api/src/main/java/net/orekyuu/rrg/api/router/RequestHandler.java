@@ -5,6 +5,22 @@ public record RequestHandler(HttpMethod method,
                              String handlerMethodName, String handlerClassName) {
 
     public String reverseRouterName() {
-        return handlerClassName + handlerMethodName;
+        return lowerCamel(handlerClassName()) + upperCamel(handlerMethodName());
+    }
+
+    public String pathBuilderName() {
+        return upperCamel(reverseRouterName()) + "Builder";
+    }
+
+    private String upperCamel(String s) {
+        String a = s.substring(1);
+        String b = String.valueOf(s.charAt(0));
+        return b.toUpperCase() + a;
+    }
+
+    private String lowerCamel(String s) {
+        String a = s.substring(1);
+        String b = String.valueOf(s.charAt(0));
+        return b.toLowerCase() + a;
     }
 }

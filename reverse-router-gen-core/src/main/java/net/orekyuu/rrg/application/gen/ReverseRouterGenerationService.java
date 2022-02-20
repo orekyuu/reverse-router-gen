@@ -21,5 +21,8 @@ public class ReverseRouterGenerationService {
     public void generate() throws IOException {
         List<RequestHandler> requestHandlers = requestHandlerRepository.all();
         generator.generateReverseRouter(requestHandlers);
+        for (RequestHandler handler : requestHandlers) {
+            generator.generatePathBuilder(handler);
+        }
     }
 }

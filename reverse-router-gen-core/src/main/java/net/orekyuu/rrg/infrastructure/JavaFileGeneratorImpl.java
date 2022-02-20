@@ -37,13 +37,25 @@ public class JavaFileGeneratorImpl implements JavaFileGenerator {
                     """.formatted(handler.handlerClassName(), handler.handlerMethodName(),
                     handler.method(), handler.uriInfo().templateString());
 
+            ClassName pathBuilderName = ClassName.get(configuration.rootPackageName(), handler.pathBuilderName());
             MethodSpec method = MethodSpec.methodBuilder(handler.reverseRouterName())
-                    .returns(ClassName.OBJECT)
+                    .returns(pathBuilderName)
                     .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
                     .addJavadoc(javadoc)
-                    .addCode("return null;").build();
+                    .addCode("return new $T();", pathBuilderName).build();
             clazz.addMethod(method);
         }
+
+        JavaFile file = JavaFile.builder(className.packageName(), clazz.build()).build();
+        file.writeTo(filer);
+    }
+
+    @Override
+    public void generatePathBuilder(RequestHandler handler) throws IOException {
+        ClassName className = ClassName.get(configuration.rootPackageName(), handler.pathBuilderName());
+
+        TypeSpec.Builder clazz = TypeSpec.classBuilder(className);
+        clazz.addModifiers(Modifier.PUBLIC, Modifier.FINAL);
 
         JavaFile file = JavaFile.builder(className.packageName(), clazz.build()).build();
         file.writeTo(filer);

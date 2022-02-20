@@ -8,4 +8,6 @@ import java.util.List;
 public interface JavaFileGenerator {
 
     void generateReverseRouter(List<RequestHandler> handlers) throws IOException;
+
+    void generatePathBuilder(RequestHandler handler) throws IOException;
 }
