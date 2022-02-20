@@ -11,4 +11,12 @@ public final class ReverseRouter {
     public static Object SimpleTestControllerall() {
         return null;
     }
+
+    /**
+     * SimpleTestController#show()
+     * GET /users/show/@{id}
+     */
+    public static Object SimpleTestControllershow() {
+        return null;
+    }
 }

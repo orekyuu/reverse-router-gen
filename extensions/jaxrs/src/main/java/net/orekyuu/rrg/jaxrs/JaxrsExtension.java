@@ -57,7 +57,7 @@ public class JaxrsExtension implements ReverseRouterGenExtension {
         ArrayList<PathSegment> result = new ArrayList<>();
 
         for (String segment : strings) {
-            result.add(new PathSegment.PathSegmentString(segment));
+            result.add(SegmentParser.parse(segment));
         }
         return result;
     }

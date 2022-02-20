@@ -9,4 +9,10 @@ class SimpleTestController {
     public void all() {
 
     }
+
+    @Path("show/@{id}")
+    @GET
+    public void show(String id) {
+
+    }
 }
