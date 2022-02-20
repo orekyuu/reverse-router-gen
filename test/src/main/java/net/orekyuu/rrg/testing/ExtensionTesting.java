@@ -5,7 +5,6 @@ import com.google.testing.compile.CompilationSubject;
 import com.google.testing.compile.JavaFileObjectSubject;
 import com.google.testing.compile.JavaFileObjects;
 import net.orekyuu.rrg.ReverseRouteProcessor;
-import net.orekyuu.rrg.api.ReverseRouterGenExtension;
 import org.junit.jupiter.api.Assertions;
 
 import javax.tools.JavaFileObject;
@@ -21,8 +20,6 @@ import java.util.List;
 import static com.google.testing.compile.Compiler.javac;
 
 public abstract class ExtensionTesting {
-
-    protected abstract ReverseRouterGenExtension extension();
 
     public void compile(String testCaseDir) {
         try {
