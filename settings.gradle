@@ -2,6 +2,7 @@ rootProject.name = 'reverse-router-gen'
 
 include ':reverse-router-gen-api'
 include ':reverse-router-gen-core'
+include ':test'
 
 include ':extensions:jaxrs'
 
