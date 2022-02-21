@@ -8,4 +8,9 @@ public class JaxrsExtensionTest extends ExtensionTesting {
     void testSimpleController() {
         compile("simpleController");
     }
+
+    @Test
+    void testSomeMethod() {
+        compile("someMethod");
+    }
 }

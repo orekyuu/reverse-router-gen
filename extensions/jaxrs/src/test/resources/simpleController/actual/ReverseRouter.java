@@ -17,4 +17,12 @@ public final class ReverseRouter {
     public static SimpleTestControllerShowBuilder simpleTestControllerShow() {
         return new SimpleTestControllerShowBuilder();
     }
+
+    /**
+     * SimpleTestController#foo()
+     * GET /users/foo
+     */
+    public static SimpleTestControllerFooBuilder simpleTestControllerFoo() {
+        return new SimpleTestControllerFooBuilder();
+    }
 }
