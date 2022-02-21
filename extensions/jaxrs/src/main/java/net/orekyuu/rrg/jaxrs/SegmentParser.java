@@ -22,6 +22,7 @@ public class SegmentParser {
                 }
                 case '}': {
                     String value = buffer.toString();
+                    value = value.split(":")[0];
                     if (!value.isEmpty()) {
                         segments.add(new PathSegment.PathSegmentVariable(value,
                                 "java.lang", "String"));

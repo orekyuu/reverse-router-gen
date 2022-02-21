@@ -8,6 +8,7 @@ allprojects {
     apply plugin: "java-library"
     group 'net.orekyuu.rrg'
     version '1.0-SNAPSHOT'
+    sourceCompatibility = JavaVersion.VERSION_17
 
     repositories {
         mavenCentral()

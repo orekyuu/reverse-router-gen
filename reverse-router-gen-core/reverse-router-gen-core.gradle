@@ -2,4 +2,5 @@ dependencies {
     implementation 'com.squareup:javapoet:1.13.0'
     implementation 'com.google.inject:guice:5.1.0'
     api project(":reverse-router-gen-api")
+    implementation project(":extensions:jaxrs")
 }

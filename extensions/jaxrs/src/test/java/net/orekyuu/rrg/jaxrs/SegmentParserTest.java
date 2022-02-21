@@ -42,4 +42,11 @@ class SegmentParserTest {
                     }
                 });
     }
+
+    @Test
+    void regex() {
+        assertThat(SegmentParser.parse("{id:\\d+}"))
+                .isInstanceOf(PathSegment.PathSegmentVariable.class)
+                .satisfies(it -> assertThat(it.templateString()).isEqualTo("{id}"));
+    }
 }

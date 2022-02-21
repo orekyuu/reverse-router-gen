@@ -8,6 +8,7 @@ import net.orekyuu.rrg.api.analyzed.AnalyzedMethod;
 import net.orekyuu.rrg.api.router.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class JaxrsExtension implements ReverseRouterGenExtension {
@@ -53,12 +54,9 @@ public class JaxrsExtension implements ReverseRouterGenExtension {
 
     private List<PathSegment> parse(AnalyzedAnnotation annotation) {
         String value = annotation.getParameterValue(String.class, "value").orElse("");
-        String[] strings = value.split("/");
-        ArrayList<PathSegment> result = new ArrayList<>();
-
-        for (String segment : strings) {
-            result.add(SegmentParser.parse(segment));
-        }
-        return result;
+        return Arrays.stream(value.split("/"))
+                .filter(s -> !s.isEmpty())
+                .map(SegmentParser::parse)
+                .toList();
     }
 }

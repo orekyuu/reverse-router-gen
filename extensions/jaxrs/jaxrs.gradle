@@ -1,5 +1,5 @@
 dependencies {
-    testImplementation 'javax.ws.rs:javax.ws.rs-api:2.1.1'
     implementation project(":reverse-router-gen-api")
+    testImplementation 'javax.ws.rs:javax.ws.rs-api:2.1.1'
     testImplementation project(":test")
 }
