@@ -18,4 +18,9 @@ public class JaxrsExtensionTest extends ExtensionTesting {
     void testPackageInfo() {
         compile("packageInfo");
     }
+
+    @Test
+    void testDuplicateController() {
+        compile("duplicateController");
+    }
 }
