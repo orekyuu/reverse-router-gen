@@ -4,8 +4,13 @@ public record RequestHandler(HttpMethod method,
                              UriInfo uriInfo,
                              String handlerMethodName, String handlerClassName) {
 
+    public String simpleClassName() {
+        String[] split = handlerClassName.split("\\.");
+        return split[split.length - 1];
+    }
+
     public String reverseRouterName() {
-        return lowerCamel(handlerClassName()) + upperCamel(handlerMethodName());
+        return lowerCamel(simpleClassName()) + upperCamel(handlerMethodName());
     }
 
     public String pathBuilderName() {
