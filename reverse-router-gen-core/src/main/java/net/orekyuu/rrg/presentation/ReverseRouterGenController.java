@@ -40,7 +40,9 @@ public class ReverseRouterGenController {
 
     public void onNewElement(ProcessingRootElement element, RoundEnvironment roundEnvironment) {
         AnalyzedClass clazz = analyzer.analyze(element);
-        extensions.process(clazz);
+        if (clazz != null) {
+            extensions.process(clazz);
+        }
     }
 
     public void onFinished() {

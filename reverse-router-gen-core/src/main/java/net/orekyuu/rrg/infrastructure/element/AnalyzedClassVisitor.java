@@ -30,6 +30,9 @@ public class AnalyzedClassVisitor extends ElementScanner14<Void, Void> {
     }
 
     AnalyzedClass toAnalyzedClass() {
+        if (current == null) {
+            return null;
+        }
         List<AnalyzedMethod> methods = executables.stream().map(this::toMethod).toList();
         List<AnalyzedAnnotation> annotations = current.getAnnotationMirrors().stream().map(this::toAnnotation).toList();
         return new AnalyzedClass(current.getQualifiedName().toString(), annotations, methods);

@@ -13,4 +13,9 @@ public class JaxrsExtensionTest extends ExtensionTesting {
     void testSomeMethod() {
         compile("someMethod");
     }
+
+    @Test
+    void testPackageInfo() {
+        compile("packageInfo");
+    }
 }
