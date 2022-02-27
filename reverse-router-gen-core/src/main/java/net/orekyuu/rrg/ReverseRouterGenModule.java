@@ -1,6 +1,7 @@
 package net.orekyuu.rrg;
 
 import com.google.inject.AbstractModule;
+import net.orekyuu.rrg.api.router.RequestHandlerNamingService;
 import net.orekyuu.rrg.api.router.RequestHandlerRepository;
 import net.orekyuu.rrg.domain.configuration.ReverseRouterGenConfiguration;
 import net.orekyuu.rrg.domain.element.ElementAnalyzer;
@@ -8,6 +9,7 @@ import net.orekyuu.rrg.domain.extension.ExtensionRepository;
 import net.orekyuu.rrg.domain.file.JavaFileGenerator;
 import net.orekyuu.rrg.infrastructure.ExtensionLoader;
 import net.orekyuu.rrg.infrastructure.JavaFileGeneratorImpl;
+import net.orekyuu.rrg.infrastructure.RequestHandlerNamingServiceImpl;
 import net.orekyuu.rrg.infrastructure.element.ElementAnalyzerImpl;
 import net.orekyuu.rrg.infrastructure.onmemory.OnMemoryRequestHandlerRepository;
 import net.orekyuu.rrg.presentation.ReverseRouterGenController;
@@ -25,6 +27,7 @@ public class ReverseRouterGenModule extends AbstractModule {
 
     @Override
     protected void configure() {
+        bind(RequestHandlerNamingService.class).to(RequestHandlerNamingServiceImpl.class).asEagerSingleton();
         bind(JavaFileGenerator.class).to(JavaFileGeneratorImpl.class).asEagerSingleton();
         bind(ReverseRouterGenController.class).asEagerSingleton();
         bind(ElementAnalyzer.class).to(ElementAnalyzerImpl.class).asEagerSingleton();

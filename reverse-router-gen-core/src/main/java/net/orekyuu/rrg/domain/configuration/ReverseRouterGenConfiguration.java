@@ -7,6 +7,10 @@ public interface ReverseRouterGenConfiguration {
         return getOption("rootPackageName", "");
     }
 
+    default String controllerRootPackage() {
+        return getOption("controllerRootPackage", "");
+    }
+
     default String reverseRouterClassName() {
         return getOption("reverseRouterClassName", "ReverseRouter");
     }

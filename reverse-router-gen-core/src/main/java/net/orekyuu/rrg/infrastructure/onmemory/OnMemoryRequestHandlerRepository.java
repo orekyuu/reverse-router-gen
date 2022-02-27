@@ -16,6 +16,6 @@ public class OnMemoryRequestHandlerRepository implements RequestHandlerRepositor
 
     @Override
     public List<RequestHandler> all() {
-        return handlers.stream().toList();
+        return handlers.stream().sorted().toList();
     }
 }

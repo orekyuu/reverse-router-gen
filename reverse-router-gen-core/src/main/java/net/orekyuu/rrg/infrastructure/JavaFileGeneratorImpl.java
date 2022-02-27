@@ -3,6 +3,7 @@ package net.orekyuu.rrg.infrastructure;
 import com.squareup.javapoet.*;
 import net.orekyuu.rrg.api.router.PathSegment;
 import net.orekyuu.rrg.api.router.RequestHandler;
+import net.orekyuu.rrg.api.router.RequestHandlerNamingService;
 import net.orekyuu.rrg.api.router.UriInfo;
 import net.orekyuu.rrg.domain.configuration.ReverseRouterGenConfiguration;
 import net.orekyuu.rrg.domain.file.JavaFileGenerator;
@@ -17,11 +18,13 @@ import java.util.List;
 public class JavaFileGeneratorImpl implements JavaFileGenerator {
     final ReverseRouterGenConfiguration configuration;
     final Filer filer;
+    final RequestHandlerNamingService namingService;
 
     @Inject
-    public JavaFileGeneratorImpl(ReverseRouterGenConfiguration configuration, Filer filer) {
+    public JavaFileGeneratorImpl(ReverseRouterGenConfiguration configuration, Filer filer, RequestHandlerNamingService namingService) {
         this.configuration = configuration;
         this.filer = filer;
+        this.namingService = namingService;
     }
 
     @Override
@@ -37,8 +40,8 @@ public class JavaFileGeneratorImpl implements JavaFileGenerator {
                     """.formatted(handler.handlerClassName(), handler.handlerMethodName(),
                     handler.method(), handler.uriInfo().templateString());
 
-            ClassName pathBuilderName = ClassName.get(configuration.rootPackageName(), handler.pathBuilderName());
-            MethodSpec method = MethodSpec.methodBuilder(handler.reverseRouterName())
+            ClassName pathBuilderName = ClassName.get(configuration.rootPackageName(), namingService.pathBuilderClassName(handler));
+            MethodSpec method = MethodSpec.methodBuilder(namingService.reverseRouterName(handler))
                     .returns(pathBuilderName)
                     .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
                     .addJavadoc(javadoc)
@@ -52,7 +55,7 @@ public class JavaFileGeneratorImpl implements JavaFileGenerator {
 
     @Override
     public void generatePathBuilder(RequestHandler handler) throws IOException {
-        ClassName className = ClassName.get(configuration.rootPackageName(), handler.pathBuilderName());
+        ClassName className = ClassName.get(configuration.rootPackageName(), namingService.pathBuilderClassName(handler));
 
         TypeSpec.Builder clazz = TypeSpec.classBuilder(className);
         clazz.addModifiers(Modifier.PUBLIC, Modifier.FINAL);
